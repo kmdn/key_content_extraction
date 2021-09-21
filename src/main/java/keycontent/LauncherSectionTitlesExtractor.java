@@ -10,13 +10,13 @@ import org.grobid.core.utilities.GrobidProperties;
 
 public class LauncherSectionTitlesExtractor {
 	public static void main(String[] args) {
-		final String pdfFolder = "C:\\Users\\wf7467\\Desktop\\JabRef\\Papers\\2021";
+		final String pdfFolder = "./papers/";//"C:\\Users\\wf7467\\Desktop\\JabRef\\Papers\\2021";
 		final String filename = "2008.05190.pdf";
 		// "2101.09969.pdf";
 		String pdfPath = pdfFolder + "\\" + filename;
 
 		try {
-			String pGrobidHome = "C:\\Users\\wf7467\\Desktop\\GitHub\\KIT\\grobid\\grobid-home";
+			String pGrobidHome = "../grobid/grobid-home";//"C:\\Users\\wf7467\\Desktop\\GitHub\\KIT\\grobid\\grobid-home";
 
 			// The GrobidHomeFinder can be instantiate without parameters to verify the
 			// grobid home in the standard
