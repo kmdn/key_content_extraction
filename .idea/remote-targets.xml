@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="wf7467@aifb-ls3-icarus:22" type="ssh/sftp">
+        <config>
+          <option name="projectRootOnTarget" value="/home/ws/wf7467/projects/key_content_extraction" />
+          <option name="serverName" value="wf7467@aifb-ls3-icarus:22 password" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="javaVersionString" value="11.0.12" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

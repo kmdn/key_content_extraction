@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="aifb-ls3-icarus" id="4d377469-f685-487b-b16f-c91571cc6309" port="22" nameFormat="DESCRIPTIVE" username="wf7467" />
+    </configs>
+  </component>
+</project>
