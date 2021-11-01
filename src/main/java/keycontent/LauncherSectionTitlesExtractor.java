@@ -25,37 +25,49 @@ public class LauncherSectionTitlesExtractor {
 		final String filename = "2008.05190.pdf";
 		// "2101.09969.pdf";
 		String pdfPath = pdfFolder + "/" + filename;
+		final String outPath = pdfPath.replace(".pdf", ".tei");
+
+		final File teiFile = new File(outPath);
+
+		final boolean CREATE_TEI = false;
 
 		try {
-			String pGrobidHome = "../grobid/grobid-home";// "C:\\Users\\wf7467\\Desktop\\GitHub\\KIT\\grobid\\grobid-home";
+			if (CREATE_TEI) {
 
-			// The GrobidHomeFinder can be instantiate without parameters to verify the
-			// grobid home in the standard
-			// location (classpath, ../grobid-home, ../../grobid-home)
+				String pGrobidHome = "../grobid/grobid-home";// "C:\\Users\\wf7467\\Desktop\\GitHub\\KIT\\grobid\\grobid-home";
 
-			// If the location is customised:
-			GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
+				// The GrobidHomeFinder can be instantiate without parameters to verify the
+				// grobid home in the standard
+				// location (classpath, ../grobid-home, ../../grobid-home)
+				// If the location is customised:
+				GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(pGrobidHome));
 
-			// The grobid yaml config file needs to be instantiate using the correct
-			// grobidHomeFinder or it will use the default
-			// locations
-			GrobidProperties.getInstance(grobidHomeFinder);
+				// The grobid yaml config file needs to be instantiate using the correct
+				// grobidHomeFinder or it will use the default
+				// locations
+				GrobidProperties.getInstance(grobidHomeFinder);
 
-			System.out.println(">>>>>>>> GROBID_HOME=" + GrobidProperties.getGrobidHome());
+				System.out.println(">>>>>>>> GROBID_HOME=" + GrobidProperties.getGrobidHome());
 
-			// Java example: https://grobid.readthedocs.io/en/latest/Grobid-java-library/
-			Engine engine = GrobidFactory.getInstance().createEngine();
+				// Java example: https://grobid.readthedocs.io/en/latest/Grobid-java-library/
+				Engine engine = GrobidFactory.getInstance().createEngine();
 
-			final long startTime = System.currentTimeMillis();
-			System.out.println("Processing...");
-			// String tei = engine.processHeader(pdfPath, 1, resHeader);
-			final Document teiDoc = engine.fullTextToTEIDoc(new File(pdfPath), GrobidAnalysisConfig.defaultInstance());
-			// System.out.println(teiDoc.getBlockDocumentHeaders());
-			System.out.println(teiDoc.getTei());
-			final String outPath = pdfPath.replace(".pdf", ".tei");
+				final long startTime = System.currentTimeMillis();
+				System.out.println("Processing...");
+				// String tei = engine.processHeader(pdfPath, 1, resHeader);
+				final Document teiDoc = engine.fullTextToTEIDoc(new File(pdfPath),
+						GrobidAnalysisConfig.defaultInstance());
+				final long endTime = System.currentTimeMillis();
+				System.out.println("Process duration: " + (endTime - startTime));
 
-			final File teiFile = new File(outPath);
-			Files.write(Path.of(teiFile.getPath()), teiDoc.getTei().getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+				// System.out.println(teiDoc.getBlockDocumentHeaders());
+				System.out.println(teiDoc.getTei());
+				Files.write(Path.of(teiFile.getPath()), teiDoc.getTei().getBytes(), StandardOpenOption.CREATE,
+						StandardOpenOption.WRITE);
+			}
+
+			// Process TEI file
+
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			try {
 
@@ -67,8 +79,6 @@ public class LauncherSectionTitlesExtractor {
 			} catch (ParserConfigurationException | SAXException | IOException e) {
 				e.printStackTrace();
 			}
-			final long endTime = System.currentTimeMillis();
-			System.out.println("Process duration: " + (endTime - startTime));
 			// System.out.println("TEI: " + tei);
 		} catch (Exception e) {
 			// If an exception is generated, print a stack trace
